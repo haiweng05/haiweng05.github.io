@@ -1,0 +1,85 @@
+/* ---- 基本样式 ---- */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #1a1a1a;
+}
+
+a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ---- 头部样式 ---- */
+.header {
+    background-color: #24292e;
+    color: #ffffff;
+    padding: 40px 0;
+    text-align: center;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 2.5em;
+    color: #ffffff;
+}
+
+.header p {
+    font-size: 1.2em;
+    color: #cccccc;
+}
+
+/* ---- 内容区域样式 ---- */
+section {
+    background-color: #ffffff;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* ---- 项目卡片样式 ---- */
+.project-card {
+    border-left: 4px solid #007BFF;
+    padding-left: 15px;
+    margin-bottom: 15px;
+}
+
+.project-card h3 {
+    margin-top: 0;
+}
+
+/* ---- 联系方式列表 ---- */
+#contact ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#contact li {
+    margin-bottom: 10px;
+}
+
+/* ---- 尾部样式 ---- */
+.footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    color: #666;
+}
