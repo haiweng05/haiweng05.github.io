@@ -1,36 +1,198 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Haiweng Xu - Personal Website</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Haiweng Xu - Personal Homepage</title>
+    <meta name="description" content="Academic homepage of Haiweng Xu">
+    
+    <!-- Tailwind CSS (Using CDN for simplicity) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter for a clean, modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Slate 50 */
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+        
+        .section-title {
+            @apply text-2xl font-bold text-slate-800 mb-6 border-b pb-2 border-slate-200;
+        }
+    </style>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb', // Blue 600
+                        secondary: '#475569', // Slate 600
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
+<body class="text-slate-700 antialiased selection:bg-blue-100 selection:text-blue-900">
 
-    <header class="header">
-        <div class="container">
-            <h1></h1>
-            <p>Undergraduate student in the School of Electronics Engineering and Computer Science at the Peking University</p>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+            
+            <!-- LEFT COLUMN: Profile & Contact (Fixed-ish look on desktop) -->
+            <div class="md:col-span-4 lg:col-span-3">
+                <div class="md:sticky md:top-10 space-y-6">
+                    
+                    <!-- Profile Image -->
+                    <div class="aspect-square w-48 md:w-full mx-auto md:mx-0 overflow-hidden rounded-2xl shadow-lg ring-1 ring-slate-200 relative bg-white">
+                        <!-- Replace src with your photo -->
+                        <img src="images/avatar.jpg" alt="Profile Photo" class="w-full h-full object-cover">
+                    </div>
+
+                    <!-- Name & Title -->
+                    <div class="text-center md:text-left">
+                        <h1 class="text-3xl font-bold text-slate-900 tracking-tight">Haiweng Xu</h1>
+                        <p class="text-lg text-primary font-medium mt-1">Undergraduate Student</p>
+                        <p class="text-slate-500 mt-1">Peking University</p>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div class="space-y-3 text-sm">
+                        <div class="flex items-center gap-3 text-slate-600">
+                            <i class="fa-solid fa-envelope w-5 text-center"></i>
+                            <a href="mailto:haiwengxu@pku.edu.cn" class="hover:text-primary transition">haiwengxu@pku.edu.cn</a>
+                        </div>
+                        <div class="flex items-center gap-3 text-slate-600">
+                            <i class="fa-solid fa-location-dot w-5 text-center"></i>
+                            <span>Beijing, China</span>
+                        </div>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div class="flex gap-4 justify-center md:justify-start pt-2">
+                        <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 text-slate-600 hover:bg-slate-800 hover:text-white transition duration-300" title="GitHub">
+                            <i class="fa-brands fa-github text-xl"></i>
+                        </a>
+                        <!-- <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 text-blue-600 hover:bg-blue-600 hover:text-white transition duration-300" title="Google Scholar">
+                            <i class="fa-solid fa-graduation-cap text-xl"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 text-blue-700 hover:bg-blue-700 hover:text-white transition duration-300" title="LinkedIn">
+                            <i class="fa-brands fa-linkedin-in text-xl"></i>
+                        </a> -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Main Content -->
+            <div class="md:col-span-8 lg:col-span-9 space-y-16">
+
+                <!-- About Me -->
+                <section id="about">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4 pb-2 border-b border-slate-200">About Me</h2>
+                    <p class="text-lg leading-relaxed text-slate-600">
+                        Hello! I am an undergraduate student at <span class="font-semibold text-slate-800">Peking University</span>.
+                        <!-- , advised by Prof. <a href="#" class="text-primary hover:underline">Advisor Name</a>.  -->
+                    </p>
+                    <p class="mt-4 text-lg leading-relaxed text-slate-600">
+                        My research interests lie in the area of <strong>Embodied AI</strong>, specifically focusing on <strong>Vision Language Action Models</strong> to achieve generalist physical intelligence.
+                         <!-- and <strong>Deep Learning</strong>. I am passionate about building efficient models for real-world applications. -->
+                    </p>
+                    
+                    <!-- Research Interests Tags -->
+                    <div class="mt-6 flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm font-medium">Vision Language Action Models</span>
+                        <span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm font-medium">Embodied AI</span>
+                    </div>
+                </section>
+
+                <!-- News -->
+                <section id="news">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6 pb-2 border-b border-slate-200 flex items-center gap-2">
+                        🔥 News <span class="text-sm font-normal text-slate-400 ml-auto">Last updated: Dec 2025</span>
+                    </h2>
+                    <div class="space-y-4">
+                        <div class="flex gap-4 items-start">
+                            <!-- <span class="shrink-0 w-24 text-sm font-semibold text-slate-400 pt-1">Sep 2023</span> -->
+                            <p> Empty up till now. To be updated.</p> <span class="font-semibold text-slate-900"></span></p>
+                            <!-- <p> </p> <span class="font-semibold text-slate-900"></span></p> -->
+                        </div>
+                        <!-- <div class="flex gap-4 items-start">
+                            <span class="shrink-0 w-24 text-sm font-semibold text-slate-400 pt-1">Sep 2023</span>
+                            <p>.... <span class="font-semibold text-slate-900">Conf Year</span>! 🎉</p>
+                        </div> -->
+                    </div>
+                </section>
+
+                <!-- Education -->
+                <section id="education">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6 pb-2 border-b border-slate-200">🎓 Education</h2>
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="mt-1 w-12 h-12 bg-white rounded border border-slate-200 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-university text-slate-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-slate-900">Peking University</h3>
+                                <p class="text-slate-700">Undergraduate Student in Computer Science</p>
+                                <p class="text-sm text-slate-500">Sep 2023 - Present</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="experience">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6 pb-2 border-b border-slate-200">💻 Experience</h2>
+                    <ul class="space-y-3 list-disc list-inside text-slate-700">
+                        <li>
+                            Undergraduate Research Project, BeingBeyond. Superviser: <a href="https://z0ngqing.github.io/">Zongqing Lu</a><span class="text-slate-400 text-sm ml-2">2025.9 - now</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Honors and Awards -->
+                <section id="honors">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6 pb-2 border-b border-slate-200">🥇 Honors & Awards</h2>
+                    <ul class="space-y-3 list-disc list-inside text-slate-700">
+                        <li>
+                            <span class="font-semibold text-slate-900">3rd Scholarship</span>, Peking University<span class="text-slate-400 text-sm ml-2">2025.9</span>
+                        </li>
+                        <li>
+                            <span class="font-semibold text-slate-900">Exceptional award for academic innovation</span>, Peking University <span class="text-slate-400 text-sm ml-2">2025.9</span>
+                        </li>
+                        <li>
+                            <span class="font-semibold text-slate-900">3rd Scholarship</span>, Peking University<span class="text-slate-400 text-sm ml-2">2024.9</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Footer -->
+                <footer class="pt-8 border-t border-slate-200 text-sm text-slate-500 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p>&copy; 2025 Haiweng Xu. All rights reserved.</p>
+                    <p>Powered by <a href="https://tailwindcss.com" class="hover:text-slate-800">Tailwind CSS</a> & GitHub Pages</p>
+                </footer>
+
+            </div>
         </div>
-    </header>
-
-    <main class="container">
-        <section id="contact">
-            <h2>Contact Me</h2>
-            <p>You can contact me via the following methods:</p>
-            <ul>
-                <li><strong>Email</strong>: <a href="mailto:2300011074@stu.pku.edu.cn">2300011074@stu.pku.edu.cn</a></li>
-                <li><strong>GitHub</strong>: <a href="https://github.com/haiweng05" target="_blank">Haiweng Xu</a></li>
-                </ul>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Haiweng Xu. All Rights Reserved.</p>
-        </div>
-    </footer>
+    </div>
 
 </body>
 </html>
