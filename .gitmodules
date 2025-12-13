@@ -1,0 +1,3 @@
+[submodule "notes/cs285"]
+	path = notes/cs285
+	url = https://github.com/haiweng05/cs285.git
