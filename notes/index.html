@@ -6,11 +6,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   
-  <!-- Theme: Vue style -->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
   
-  <!-- KaTeX CSS: Use specific version 0.16.10 for stability -->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css"/>
+  
+  <style>
+    .katex { font-size: 1.1em; }
+    /* 修复行内公式在某些情况下被当做代码块背景的问题 */
+    code { background-color: transparent !important; }
+    /* 恢复普通代码块的背景 */
+    pre code { background-color: #f8f8f8 !important; }
+  </style>
 </head>
 <body>
   <div id="app">Loading Notes...</div>
@@ -23,42 +29,19 @@
       subMaxLevel: 3,
       auto2top: true,
       
-      // LaTeX (KaTeX) Configuration
+      // LaTeX 配置
       katex: {
         trust: true,
         strict: false,
-        delimiters: [
-          {left: "$$", right: "$$", display: true},
-          {left: "$", right: "$", display: false},
-          {left: "\\(", right: "\\)", display: false},
-          {left: "\\[", right: "\\]", display: true}
-        ]
       },
 
-      // PLUGINS configuration
-      plugins: [
-        function(hook) {
-          // Hook: run before parsing Markdown
-          hook.beforeEach(function(content) {
-            // Regex to find math blocks: $$...$$ or $...$
-            // Updated to be compatible with browsers lacking lookbehind support (Safari < 16.4, etc.)
-            return content.replace(
-              /(\$\$[\s\S]*?\$\$)|((?:^|[^\\])\$(?:\\.|[^\\$])+?\$)/g,
-              function(match) {
-                // Replace underscore with escaped underscore inside math to prevent italics parsing
-                return match.replace(/_/g, '\\_');
-              }
-            );
-          });
-        }
-      ],
-
-      // Markdown configuration (Keep this as a backup)
+      // 关键修复：使用 Markdown 配置来保护 TeX 符号，而不是使用正则替换
       markdown: {
         renderer: {
           code: function(code, lang) {
             if (lang === "tex" || lang === "latex") {
-              return '<span class="tex" data-expr="' + code + '"></span>';
+              // 显式处理 latex 代码块
+              return ('<span class="tex" data-expr="' + code + '"></span>');
             }
             return this.origin.code.apply(this, arguments);
           }
@@ -67,27 +50,13 @@
     };
   </script>
   
-  <!-- 1. Docsify Core -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
   
-  <!-- 2. KaTeX Core Library (Locked Version) -->
   <script src="//cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
 
-  <!-- 3. Plugins -->
-  <!-- KaTeX Plugin -->
   <script src="//cdn.jsdelivr.net/npm/docsify-katex@latest/dist/docsify-katex.js"></script>
-  <!-- Copy Code Plugin -->
-  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
   
-  <!-- Debug Helper -->
-  <script>
-    window.onload = function() {
-      if (window.katex) {
-        console.log("✅ KaTeX library loaded successfully. (Ignore Tracking Prevention warnings, they are normal for CDNs)");
-      } else {
-        console.error("❌ KaTeX library failed to load.");
-      }
-    }
-  </script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+
 </body>
 </html>
