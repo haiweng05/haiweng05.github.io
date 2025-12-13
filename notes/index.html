@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   
-  <!-- Theme -->
+  <!-- Theme: Vue style -->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
   
-  <!-- KaTeX CSS (Math Styling) -->
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"/>
+  <!-- KaTeX CSS: Use specific version 0.16.10 for stability -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css"/>
 </head>
 <body>
   <div id="app">Loading Notes...</div>
@@ -23,25 +23,55 @@
       subMaxLevel: 3,
       auto2top: true,
       
-      // LaTeX configuration
+      // LaTeX (KaTeX) Configuration
       katex: {
         trust: true,
         strict: false,
+        // Explicitly tell KaTeX what to look for
+        delimiters: [
+          {left: "$$", right: "$$", display: true},
+          {left: "$", right: "$", display: false},
+          {left: "\\(", right: "\\)", display: false},
+          {left: "\\[", right: "\\]", display: true}
+        ]
+      },
+
+      // CRITICAL FIX: Custom Markdown renderer to prevent 
+      // Docsify from eating underscores (_) in math formulas
+      markdown: {
+        renderer: {
+          code: function(code, lang) {
+            if (lang === "tex" || lang === "latex") {
+              return '<span class="tex" data-expr="' + code + '"></span>';
+            }
+            return this.origin.code.apply(this, arguments);
+          }
+        }
       }
-    }
+    };
   </script>
   
   <!-- 1. Docsify Core -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
   
-  <!-- 2. KaTeX Core Library (MISSING IN YOUR CODE) -->
-  <!-- This is required before the docsify-katex plugin can work -->
-  <script src="//cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <!-- 2. KaTeX Core Library (Locked Version) -->
+  <script src="//cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
 
   <!-- 3. Plugins -->
   <!-- KaTeX Plugin -->
   <script src="//cdn.jsdelivr.net/npm/docsify-katex@latest/dist/docsify-katex.js"></script>
   <!-- Copy Code Plugin -->
   <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+  
+  <!-- Debug Helper: Check console if KaTeX is loaded -->
+  <script>
+    window.onload = function() {
+      if (window.katex) {
+        console.log("✅ KaTeX library loaded successfully.");
+      } else {
+        console.error("❌ KaTeX library failed to load.");
+      }
+    }
+  </script>
 </body>
 </html>
