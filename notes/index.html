@@ -27,7 +27,6 @@
       katex: {
         trust: true,
         strict: false,
-        // Explicitly tell KaTeX what to look for
         delimiters: [
           {left: "$$", right: "$$", display: true},
           {left: "$", right: "$", display: false},
@@ -36,8 +35,25 @@
         ]
       },
 
-      // CRITICAL FIX: Custom Markdown renderer to prevent 
-      // Docsify from eating underscores (_) in math formulas
+      // PLUGINS configuration
+      plugins: [
+        function(hook) {
+          // Hook: run before parsing Markdown
+          hook.beforeEach(function(content) {
+            // Regex to find math blocks: $$...$$ or $...$
+            // It protects underscores (_) inside math from being parsed as italic
+            return content.replace(
+              /(\$\$[\s\S]*?\$\$|(?<!\\)\$((?:\\.|[^\\$])*?)(?<!\\)\$)/g,
+              function(match) {
+                // Replace underscore with escaped underscore inside math
+                return match.replace(/_/g, '\\_');
+              }
+            );
+          });
+        }
+      ],
+
+      // Markdown configuration (Keep this as a backup)
       markdown: {
         renderer: {
           code: function(code, lang) {
@@ -63,7 +79,7 @@
   <!-- Copy Code Plugin -->
   <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
   
-  <!-- Debug Helper: Check console if KaTeX is loaded -->
+  <!-- Debug Helper -->
   <script>
     window.onload = function() {
       if (window.katex) {
