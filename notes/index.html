@@ -11,11 +11,10 @@
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css"/>
   
   <style>
+    /* 优化公式显示大小 */
     .katex { font-size: 1.1em; }
-    /* 修复行内公式在某些情况下被当做代码块背景的问题 */
-    code { background-color: transparent !important; }
-    /* 恢复普通代码块的背景 */
-    pre code { background-color: #f8f8f8 !important; }
+    /* 修复行内公式可能出现的背景色问题 */
+    span.katex-display { margin: 0.5em 0; }
   </style>
 </head>
 <body>
@@ -29,24 +28,21 @@
       subMaxLevel: 3,
       auto2top: true,
       
-      // LaTeX 配置
-      katex: {
-        trust: true,
-        strict: false,
+      // -------------------------------------------
+      // 新版配置: 使用 latex 属性而不是 katex
+      // -------------------------------------------
+      latex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']], // 设置行内公式定界符
+        displayMath: [['$$', '$$'], ['\\[', '\\]']], // 设置块级公式定界符
+        // 自定义 KaTeX 选项
+        customOptions: {
+           macros: {
+               // 这里可以定义全局宏，例如 "\\RR": "\\mathbb{R}"
+           }
+        }
       },
 
-      // 关键修复：使用 Markdown 配置来保护 TeX 符号，而不是使用正则替换
-      markdown: {
-        renderer: {
-          code: function(code, lang) {
-            if (lang === "tex" || lang === "latex") {
-              // 显式处理 latex 代码块
-              return ('<span class="tex" data-expr="' + code + '"></span>');
-            }
-            return this.origin.code.apply(this, arguments);
-          }
-        }
-      }
+      // 注意：这里不再需要 plugins 里的正则替换 hook，彻底删除了旧逻辑
     };
   </script>
   
@@ -54,9 +50,9 @@
   
   <script src="//cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
 
-  <script src="//cdn.jsdelivr.net/npm/docsify-katex@latest/dist/docsify-katex.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-latex@0"></script>
   
   <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
-
+  
 </body>
 </html>
