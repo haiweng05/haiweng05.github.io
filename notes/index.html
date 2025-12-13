@@ -41,11 +41,11 @@
           // Hook: run before parsing Markdown
           hook.beforeEach(function(content) {
             // Regex to find math blocks: $$...$$ or $...$
-            // It protects underscores (_) inside math from being parsed as italic
+            // Updated to be compatible with browsers lacking lookbehind support (Safari < 16.4, etc.)
             return content.replace(
-              /(\$\$[\s\S]*?\$\$|(?<!\\)\$((?:\\.|[^\\$])*?)(?<!\\)\$)/g,
+              /(\$\$[\s\S]*?\$\$)|((?:^|[^\\])\$(?:\\.|[^\\$])+?\$)/g,
               function(match) {
-                // Replace underscore with escaped underscore inside math
+                // Replace underscore with escaped underscore inside math to prevent italics parsing
                 return match.replace(/_/g, '\\_');
               }
             );
@@ -83,7 +83,7 @@
   <script>
     window.onload = function() {
       if (window.katex) {
-        console.log("✅ KaTeX library loaded successfully.");
+        console.log("✅ KaTeX library loaded successfully. (Ignore Tracking Prevention warnings, they are normal for CDNs)");
       } else {
         console.error("❌ KaTeX library failed to load.");
       }
