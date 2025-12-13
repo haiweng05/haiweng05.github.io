@@ -6,19 +6,18 @@ Welcome to my personal notebook! Here I document my learning process, course not
 
 ### UC Berkeley
 
-- [CS285] Deep Reinforcement Learning: Notes on policy gradients, actor-critic, and model-based RL.
+- [CS285 Deep Reinforcement Learning](cs285/)
 
-### Stanford
+<!-- ### Stanford
 
-- [CS231n] Computer Vision: CNNs, Transformers, and Generative Models.
-
+- [CS231n] Computer Vision: CNNs, Transformers, and Generative Models. -->
+<!-- 
 ### Peking University
 
 - Mathematical Analysis: Real analysis concepts and problem-solving techniques.
 
-- Discrete Mathematics and Structures:
+- Discrete Mathematics and Structures: -->
 
-- 
 
 ### 📝 Research & Reading
 
