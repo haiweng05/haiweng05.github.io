@@ -8,21 +8,9 @@ Welcome to my personal notebook! Here I document my learning process, course not
 
 - [CS285 Deep Reinforcement Learning](cs285/)
 
-<!-- ### Stanford
-
-- [CS231n] Computer Vision: CNNs, Transformers, and Generative Models. -->
-<!-- 
 ### Peking University
 
-- Mathematical Analysis: Real analysis concepts and problem-solving techniques.
-
-- Discrete Mathematics and Structures: -->
+- [Information Theory](Information-Theory/)
 
 
 ### 📝 Research & Reading
-
-<!-- Paper Reviews: Summaries of papers I've read recently.
-
-Tutorials: Setup guides for environments (Mujoco, Docker, etc).
-
-Last updated: 2024 -->
